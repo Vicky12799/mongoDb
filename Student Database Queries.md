@@ -5,7 +5,7 @@ db.student.aggregate([{"$project": {_id: "$name","x":  {"$sum": "$scores.score"}
 
 # 2. Find students who scored below average in the exam and pass mark is 40%?
 ```Javascript
-var average = db.student.aggregate([{$group: {_id:null, avg_val:{$avg:{$arrayElemAt: ['$scores.score',0]}}}}]).toArray()[0]["avg_val"];
+var examAvg = db.student.aggregate([{$group: {_id:null, avg_val:{$avg:{$arrayElemAt: ['$scores.score',0]}}}}]).toArray()[0]["avg_val"];
 db.student.find({$and: [{"scores.0.score":{$lte:examAvg}},{"scores.0.score":{$gte:40}}]})
 ```
 
